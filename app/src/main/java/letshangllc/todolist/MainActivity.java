@@ -14,7 +14,7 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "TodoTaskPrefs";
 
-    private ArrayList<String> array_tasks;
+    private ArrayList<Task> array_tasks;
 
     Toolbar toolbar;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDialogPositiveClick(String newName) {
                         if(!newName.isEmpty()){
-                            array_tasks.add(newName);
+                            array_tasks.add(new Task(newName));
                         }
                     }
                 });
