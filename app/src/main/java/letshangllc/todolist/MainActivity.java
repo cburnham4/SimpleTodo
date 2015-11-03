@@ -9,11 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "TodoTaskPrefs";
+
+    private ArrayList<String> array_tasks;
 
     Toolbar toolbar;
 
@@ -46,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.action_add:
+                Dialog_AddItem dialog_addItem = new Dialog_AddItem();
+                dialog_addItem.setCallback(new Dialog_AddItem.AddItemListener() {
+                    @Override
+                    public void onDialogPositiveClick(String newName) {
+                        if(!newName.isEmpty()){
+                            array_tasks.add(newName);
+                        }
+                    }
+                });
                 break;
         }
 
