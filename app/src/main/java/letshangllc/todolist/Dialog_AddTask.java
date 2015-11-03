@@ -8,12 +8,11 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by cvburnha on 11/3/2015.
  */
-public class Dialog_AddItem extends DialogFragment {
+public class Dialog_AddTask extends DialogFragment {
 
 
     public interface AddItemListener {
@@ -54,7 +53,7 @@ public class Dialog_AddItem extends DialogFragment {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Dialog_AddItem.this.getDialog().cancel();
+                        Dialog_AddTask.this.getDialog().cancel();
                     }
                 });
         return builder.create();

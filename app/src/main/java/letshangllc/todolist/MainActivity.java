@@ -1,13 +1,11 @@
 package letshangllc.todolist;
 
-import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.action_add:
-                Dialog_AddItem dialog_addItem = new Dialog_AddItem();
-                dialog_addItem.setCallback(new Dialog_AddItem.AddItemListener() {
+                Dialog_AddTask dialog_addTask = new Dialog_AddTask();
+                dialog_addTask.setCallback(new Dialog_AddTask.AddItemListener() {
                     @Override
                     public void onDialogPositiveClick(String newName) {
                         if(!newName.isEmpty()){
@@ -58,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+                dialog_addTask.show(getSupportFragmentManager(), "dialog");
                 break;
         }
 
