@@ -3,12 +3,15 @@ package letshangllc.todolist;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +19,15 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Task> array_tasks;
 
+    private Set<String> setOfItems;
+
+    private TaskAdapter taskAdapter;
+
     Toolbar toolbar;
+
+    /* Todo
+    swipe to remove item
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +35,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, 0);
-        Set<String> setOfItems = prefs.getStringSet("todoSet", new HashSet<String>());
+        setOfItems = prefs.getStringSet("todoSet", new HashSet<String>());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
 
+        this.fillArrayList();
 
+        taskAdapter = new TaskAdapter(array_tasks, this);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+
+
+        recyclerView.setAdapter(taskAdapter);
+
+
+    }
+
+    private void fillArrayList(){
+        /* Todo:
+            pull from db or use set in adapter
+         */
+        array_tasks = new ArrayList<>();
+        Iterator<String> it = setOfItems.iterator();
+        while(it.hasNext()){
+            array_tasks.add(new Task(it.next()));
+        }
     }
 
     @Override
@@ -53,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onDialogPositiveClick(String newName) {
                         if(!newName.isEmpty()){
                             array_tasks.add(new Task(newName));
+                            taskAdapter.notifyDataSetChanged();
+                            setOfItems.add(newName);
+
+                            saveTasks();
                         }
                     }
                 });
@@ -61,5 +99,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveTasks(){
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("todoSet", setOfItems);
+        editor.commit();
     }
 }
