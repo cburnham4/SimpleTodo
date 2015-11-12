@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TaskAdapter taskAdapter;
 
+    private SharedPreferences prefs;
+
     Toolbar toolbar;
 
     /* Todo
@@ -34,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, 0);
-        setOfItems = prefs.getStringSet("todoSet", new HashSet<String>());
+        prefs = getSharedPreferences(PREFS_NAME, 0);
+        setOfItems = new HashSet<String>(prefs.getStringSet("todoSet", new HashSet<String>()));
 
         toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
@@ -102,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveTasks(){
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putStringSet("todoSet", setOfItems);
         editor.commit();
