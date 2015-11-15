@@ -67,8 +67,12 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 //Remove swiped item from list and notify the RecyclerView
                 int index = viewHolder.getAdapterPosition();
+                String task = array_tasks.get(index).getTask();
                 array_tasks.remove(index);
+                setOfItems.remove(task);
                 taskAdapter.notifyDataSetChanged();
+
+                saveTasks();
 
             }
         };

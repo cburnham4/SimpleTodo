@@ -50,19 +50,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
 
         viewHolder.tv_task.setText(task.getTask());
-        viewHolder.bx_complete_task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    Toast.makeText(context, "Box selected", Toast.LENGTH_SHORT).show();
-                    tasks.remove(task);
-                    notifyItemRemoved(position);
-                    //notifyDataSetChanged();
-
-                }
-            }
-        });
-        viewHolder.bx_complete_task.setChecked(false);
+//        viewHolder.bx_complete_task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    Toast.makeText(context, "Box selected", Toast.LENGTH_SHORT).show();
+//                    tasks.remove(task);
+//                    notifyItemRemoved(position);
+//                    //notifyDataSetChanged();
+//
+//                }
+//            }
+//        });
+//        viewHolder.bx_complete_task.setChecked(false);
 
     }
 
@@ -75,12 +75,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_task;
-        public CheckBox bx_complete_task;
+       // public CheckBox bx_complete_task;
 
         public ViewHolder(View view) {
             super(view);
             tv_task = (TextView) view.findViewById(R.id.tv_task);
-            bx_complete_task = (CheckBox) view.findViewById(R.id.bx_complete_task);
+            //bx_complete_task = (CheckBox) view.findViewById(R.id.bx_complete_task);
 
 
         }
