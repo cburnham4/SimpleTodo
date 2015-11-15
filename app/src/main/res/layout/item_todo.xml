@@ -20,9 +20,11 @@
 
         android:textColor="@color/black"
         android:layout_margin="5dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="20sp"
-        android:id="@+id/tv_task"/>
+        android:paddingLeft="10dp"
+        android:textSize="24sp"
+
+        android:id="@+id/tv_task"
+        android:textStyle="normal" />
 
     <!-- line seperating the layout items -->
     <TextView
