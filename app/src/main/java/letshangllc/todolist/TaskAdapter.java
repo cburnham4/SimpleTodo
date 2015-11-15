@@ -42,11 +42,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
-        Task task = tasks.get(position);
+        final Task task = tasks.get(position);
 
 
         viewHolder.tv_task.setText(task.getTask());
@@ -55,9 +55,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Toast.makeText(context, "Box selected", Toast.LENGTH_SHORT).show();
+                    tasks.remove(task);
+                    notifyItemRemoved(position);
+                    //notifyDataSetChanged();
+
                 }
             }
         });
+        viewHolder.bx_complete_task.setChecked(false);
 
     }
 
