@@ -25,4 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:+'
     compile 'com.android.support:recyclerview-v7:+'
+
+    compile 'com.google.android.gms:play-services:6.5.87'
+    compile files('libs/amazon-ads-5.3.22.jar')
 }

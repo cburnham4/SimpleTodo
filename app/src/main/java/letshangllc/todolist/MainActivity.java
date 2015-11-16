@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    AdsHelper adsHelper;
+
     /* Todo
     swipe to remove item
      */
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
 
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.admob_banner_id), this);
+        adsHelper.runAds();
 
 
     }
